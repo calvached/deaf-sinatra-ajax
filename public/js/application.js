@@ -3,7 +3,7 @@ $(document).ready(function() {
     // This guarantees that any elements we bind to will exist on the page
     // when we try to bind to them
 
-    // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+
     $("#target").on('submit', function(event) {
         event.preventDefault();
         var data = $(this).serialize();
@@ -11,15 +11,12 @@ $(document).ready(function() {
             type: "POST",
             url: '/grandma',
             data: data,
+            dataType: 'html',
             success: function(response) {
-                // console.log($('p').html());
-                console.log(response);
+                var $response = $(response);
+                console.log($('p', $response)[0].innerText);
+                $('#ajax_response').append($('p', $response)[0].innerText)
             }
         });
-
-
-        // $.post("/grandma", function() {
-        //     alert("success");
-        // });
     });
 });
